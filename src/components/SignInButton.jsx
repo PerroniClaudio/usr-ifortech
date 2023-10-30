@@ -22,10 +22,6 @@ function SignInButton() {
       account: response.account,
     });
 
-    sessionStorage.setItem("accessToken", tokenResponse.accessToken);
-
-    console.log("???");
-
     const formData = {
       name: tokenResponse.account.name,
       email: tokenResponse.account.username,
