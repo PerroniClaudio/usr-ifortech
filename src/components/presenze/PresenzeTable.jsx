@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const columnHelper = createColumnHelper();
 
@@ -57,6 +58,7 @@ const columns = [
 
 function PresenzeTable({ attendances }) {
   const [sorting, setSorting] = useState([]);
+  const navigate = useNavigate();
 
   const table = useReactTable({
     data: attendances,
@@ -69,6 +71,10 @@ function PresenzeTable({ attendances }) {
     getSortedRowModel: getSortedRowModel(),
     onSortingChange: setSorting,
   });
+
+  const editPresenza = (id) => () => {
+    navigate(`/presenze/${id}`);
+  };
 
   return (
     <div className="overflow-x-auto">
@@ -104,15 +110,22 @@ function PresenzeTable({ attendances }) {
           ))}
         </thead>
         <tbody>
-          {table.getRowModel().rows.map((row) => (
-            <tr key={row.id}>
-              {row.getVisibleCells().map((cell) => (
-                <td key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
-            </tr>
-          ))}
+          {table.getRowModel().rows.map((row) => {
+            let presenzaId = row.getVisibleCells()[0].getValue();
+
+            return (
+              <tr
+                key={row.id}
+                onClick={editPresenza(presenzaId)}
+                className="cursor-pointer hover:bg-base-200">
+                {row.getVisibleCells().map((cell) => (
+                  <td key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                ))}
+              </tr>
+            );
+          })}
         </tbody>
       </table>
       <div className="h-4" />

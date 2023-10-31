@@ -1,3 +1,4 @@
+import { useParams, useLoaderData } from "react-router-dom";
 import { useState } from "react";
 import useSWR from "swr";
 import axios from "../lib/axios";
@@ -5,7 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 
-function PresenzeCreate() {
+function PresenzeEdit() {
+  const params = useLoaderData();
   const navigate = useNavigate();
 
   const {
@@ -25,13 +27,26 @@ function PresenzeCreate() {
   );
 
   const [formData, setFormData] = useState({
-    date: "",
-    time_in: "",
-    time_out: "",
-    company_id: "",
-    attendance_type_id: "",
+    date: params.date,
+    time_in: params.time_in,
+    time_out: params.time_out,
+    company_id: params.company_id,
+    attendance_type_id: params.attendance_type_id,
   });
-  const [buttonDisabled, setButtonDisabled] = useState(true);
+  const [buttonDisabled, setButtonDisabled] = useState(false);
+
+  const updatePresenza = (e) => {
+    e.preventDefault();
+
+    axios
+      .patch(`/api/attendance/${params.id}`, formData)
+      .then((res) => {
+        navigate("/presenze");
+      })
+      .catch((e) => {
+        toast.error(e.response.data.message);
+      });
+  };
 
   useEffect(() => {
     const checkFormDisabled = () => {
@@ -47,25 +62,11 @@ function PresenzeCreate() {
     setButtonDisabled(checkFormDisabled());
   }, [formData]);
 
-  const storePresenza = (e) => {
-    e.preventDefault();
-
-    axios
-      .post("/api/attendance", formData)
-      .then((res) => {
-        toast.success("Presenza creata con successo");
-        navigate("/presenze");
-      })
-      .catch((e) => {
-        toast.error(e.response.data.message);
-      });
-  };
-
   return (
     <div className="pt-8 flex flex-col">
-      <h1 className="text-4xl font-bold">Nuova Presenza</h1>
+      <h1 className="text-4xl font-bold">Modifica Presenza</h1>
       <div className="divider" />
-      <form onSubmit={storePresenza}>
+      <form onSubmit={updatePresenza}>
         <div className="form-control">
           <label className="label">
             <span className="label-text">Data</span>
@@ -159,4 +160,4 @@ function PresenzeCreate() {
     </div>
   );
 }
-export default PresenzeCreate;
+export default PresenzeEdit;

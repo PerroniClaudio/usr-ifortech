@@ -20,19 +20,15 @@ function Presenze() {
   };
 
   return (
-    <div className="pt-8 flex flex-col gap-2">
-      <h1 className="text-4xl font-bold">Presenze</h1>
-      <div className="divider" />
-      <div className="card w-96 bg-base-200 shadow-xl mb-8">
-        <div className="card-body">
-          <h2 className="card-title">Nuova presenza</h2>
-          <div className="card-actions justify-end">
-            <button className="btn btn-primary" onClick={navigateToNew}>
-              Segna una nuova presenza
-            </button>
-          </div>
-        </div>
+    <div className="pt-8 flex flex-col">
+      <div className="flex justify-between items-center">
+        <h1 className="text-4xl font-bold">Presenze</h1>
+        <button className="btn btn-primary w-1/4" onClick={navigateToNew}>
+          Nuova presenza
+        </button>
       </div>
+
+      <div className="divider" />
 
       {isLoading ? (
         <div className="flex flex-col items-center justify-center">
