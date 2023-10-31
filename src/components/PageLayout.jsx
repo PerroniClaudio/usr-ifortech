@@ -25,11 +25,6 @@ function PageLayout(props) {
           <input id="drawer-main" type="checkbox" className="drawer-toggle" />
           <div className="drawer-content flex flex-col">
             <div className="max-w-[100vw] px-6 pb-16">
-              <label
-                htmlFor="drawer-main"
-                className="btn btn-primary drawer-button lg:hidden">
-                Mostra sidenav
-              </label>
               <Navbar />
               {props.children}
             </div>

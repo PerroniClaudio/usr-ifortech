@@ -18,6 +18,7 @@ import PageLayout from "./components/PageLayout";
 import Presenze from "./routes/presenze.jsx";
 import PresenzeCreate from "./routes/presenze-create.jsx";
 import PresenzeEdit from "./routes/presenze-edit.jsx";
+import Ferie from "./routes/ferie";
 
 const router = createBrowserRouter([
   {
@@ -38,7 +39,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/presenze/:id",
-    loader: async ({ req, params }) => {
+    loader: async ({ request, params }) => {
       return axios.get(`/api/attendance/${params.id}`).then((res) => res.data);
     },
     element: (
@@ -52,6 +53,14 @@ const router = createBrowserRouter([
     element: (
       <PageLayout>
         <PresenzeCreate />
+      </PageLayout>
+    ),
+  },
+  {
+    path: "/ferie",
+    element: (
+      <PageLayout>
+        <Ferie />
       </PageLayout>
     ),
   },

@@ -2,7 +2,7 @@ import { UserCheck, CarFront, CalendarDays } from "lucide-react";
 
 function Sidenav() {
   return (
-    <div className="drawer-side">
+    <div className="drawer-side z-50 ">
       <label
         htmlFor="drawer-main"
         aria-label="close sidebar"

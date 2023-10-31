@@ -1,5 +1,7 @@
 import { useAuth } from "../hooks/useAuth";
 
+import { Menu } from "lucide-react";
+
 function Navbar() {
   const { user, isLoading } = useAuth({
     middleware: "auth",
@@ -23,7 +25,12 @@ function Navbar() {
     .join("");
 
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-100 px-0">
+      <label
+        htmlFor="drawer-main"
+        className="btn btn-primary drawer-button lg:hidden">
+        <Menu />
+      </label>
       <div className="flex-1"></div>
       <div className="flex-none gap-2">
         <div className="form-control">
