@@ -1,4 +1,5 @@
 import FerieCalendar from "../components/ferie/FerieCalendar";
+import swr from "swr";
 
 function Ferie() {
   return (
