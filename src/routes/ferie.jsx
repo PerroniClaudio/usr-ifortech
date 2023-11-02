@@ -26,6 +26,10 @@ function Ferie() {
     navigate("/nuove-ferie");
   };
 
+  const navigateToEdit = (id) => {
+    navigate(`/ferie/${id}`);
+  };
+
   return (
     <div className="pt-8 flex flex-col">
       <div className="flex justify-between items-center">
@@ -36,7 +40,7 @@ function Ferie() {
       </div>
 
       <div className="divider" />
-      <FerieCalendar events={ferie} />
+      <FerieCalendar events={ferie} clickHandler={navigateToEdit} />
     </div>
   );
 }

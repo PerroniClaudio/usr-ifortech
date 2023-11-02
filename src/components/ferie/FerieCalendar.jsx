@@ -18,7 +18,7 @@ const locale = {
   },
 };
 
-function FerieCalendar({ events }) {
+function FerieCalendar({ events, clickHandler }) {
   const eventTypeColors = {
     11: "#d50000",
     12: "#2962ff ",
@@ -42,6 +42,7 @@ function FerieCalendar({ events }) {
       initialView="dayGridMonth"
       locale={locale}
       events={eventsFormatted}
+      eventClick={(info) => clickHandler(info.event.extendedProps.original.id)}
     />
   );
 }
