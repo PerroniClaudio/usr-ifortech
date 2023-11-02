@@ -18,12 +18,30 @@ const locale = {
   },
 };
 
-function FerieCalendar() {
+function FerieCalendar({ events }) {
+  const eventTypeColors = {
+    11: "#d50000",
+    12: "#2962ff ",
+    13: "#01579b",
+    14: "#6200ea",
+    15: "#1b5e20",
+  };
+
+  const eventsFormatted = events.map((event) => ({
+    id: event.id,
+    title: `${event.type.name} - ${event.user.name}`,
+    start: event.date_from,
+    end: event.date_to,
+    original: event,
+    color: eventTypeColors[event.type.id],
+  }));
+
   return (
     <FullCalendar
       plugins={[dayGridPlugin]}
       initialView="dayGridMonth"
       locale={locale}
+      events={eventsFormatted}
     />
   );
 }

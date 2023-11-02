@@ -1,4 +1,3 @@
-import { useAuth } from "../hooks/useAuth";
 import axios from "../lib/axios";
 import useSWR from "swr";
 import PresenzeTable from "../components/presenze/PresenzeTable";

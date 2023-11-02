@@ -19,6 +19,7 @@ import Presenze from "./routes/presenze.jsx";
 import PresenzeCreate from "./routes/presenze-create.jsx";
 import PresenzeEdit from "./routes/presenze-edit.jsx";
 import Ferie from "./routes/ferie";
+import FerieCreate from "./routes/ferie-create";
 
 const router = createBrowserRouter([
   {
@@ -61,6 +62,14 @@ const router = createBrowserRouter([
     element: (
       <PageLayout>
         <Ferie />
+      </PageLayout>
+    ),
+  },
+  {
+    path: "/nuove-ferie",
+    element: (
+      <PageLayout>
+        <FerieCreate />
       </PageLayout>
     ),
   },
