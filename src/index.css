@@ -41,3 +41,14 @@
 .fc .fc-daygrid-day.fc-day-today {
   background-color: hsl(var(--p) / 0.4);
 }
+
+::-moz-selection {
+  /* Code for Firefox */
+  color: red;
+  background: var(--b3);
+}
+
+::selection {
+  color: hsl(var(--p));
+  background: hsl(var(--b3));
+}

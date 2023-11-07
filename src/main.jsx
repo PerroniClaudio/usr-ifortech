@@ -15,12 +15,24 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 const msalInstance = new PublicClientApplication(msalConfig);
 
 import PageLayout from "./components/PageLayout";
+
+/** Presenze */
+
 import Presenze from "./routes/presenze.jsx";
 import PresenzeCreate from "./routes/presenze-create.jsx";
 import PresenzeEdit from "./routes/presenze-edit.jsx";
+
+/** Ferie */
+
 import Ferie from "./routes/ferie";
 import FerieCreate from "./routes/ferie-create";
 import FerieEdit from "./routes/ferie-edit";
+
+/** Trasferte */
+
+import Trasferte from "./routes/trasferte.jsx";
+import TrasferteCreate from "./routes/tasferte-create.jsx";
+import TrasferteEdit from "./routes/trasferte-edit.jsx";
 
 const router = createBrowserRouter([
   {
@@ -84,6 +96,35 @@ const router = createBrowserRouter([
     element: (
       <PageLayout>
         <FerieEdit />
+      </PageLayout>
+    ),
+  },
+  {
+    path: "/trasferte",
+    element: (
+      <PageLayout>
+        <Trasferte />
+      </PageLayout>
+    ),
+  },
+  {
+    path: "/nuova-trasferta",
+    element: (
+      <PageLayout>
+        <TrasferteCreate />
+      </PageLayout>
+    ),
+  },
+  {
+    path: "/trasferte/:id",
+    loader: async ({ request, params }) => {
+      return axios
+        .get(`/api/business-trip/${params.id}`)
+        .then((res) => res.data);
+    },
+    element: (
+      <PageLayout>
+        <TrasferteEdit />
       </PageLayout>
     ),
   },
