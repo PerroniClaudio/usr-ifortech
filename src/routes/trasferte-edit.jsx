@@ -1,19 +1,41 @@
 import { useNavigate, useLoaderData } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "../lib/axios";
-import useSWR from "swr";
-import { toast } from "react-toastify";
-import { PlusIcon } from "lucide-react";
 import SpeseTable from "../components/trasferte/SpeseTable";
 import SpostamentiTable from "../components/trasferte/SpostamentiTable";
 function TrasferteEdit() {
   const params = useLoaderData();
   const navigate = useNavigate();
 
-  const submitTrasferta = () => {};
   const today = new Date();
 
   const [formData, setFormData] = useState(params);
+
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
+
+  useEffect(() => {
+    if (
+      formData.date_from &&
+      formData.date_to &&
+      formData.expense_type !== ""
+    ) {
+      setIsSubmitDisabled(false);
+    } else {
+      setIsSubmitDisabled(true);
+    }
+  }, [formData]);
+
+  const submitTrasferta = () => {
+    axios
+      .patch(`/api/business-trip/${params.id}`, formData)
+      .then((res) => {
+        toast.success(res.data.message);
+        navigate("/trasferte");
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      });
+  };
 
   return (
     <div className="pt-8 flex flex-col">
